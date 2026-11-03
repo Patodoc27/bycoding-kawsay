@@ -214,7 +214,6 @@ p+p{margin-top:8px}
     <button class="solapa" data-p="p-g3">Grupo 3<small>Mamaní · Giménez</small></button>
     <button class="solapa" data-p="p-g4">Grupo 4<small>Alves · Martínez</small></button>
     <button class="solapa" data-p="p-g5">Grupo 5<small>Abdo · Herrera</small></button>
-    <button class="solapa doc" data-p="p-doc">Profe<small>control de la clase</small></button>
   </nav>
 
   <!-- ================= HOY ================= -->
@@ -569,26 +568,6 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
     </div>
   </div>
 
-  <!-- ================= PROFE ================= -->
-  <div class="panel" id="p-doc">
-    <section class="card">
-      <h2>Control de la clase</h2>
-      <p><b>1°A</b> (Grupos 1 y 2, parlamentos N° 4, 6, 8 y 9) y <b>1°B</b> (Grupos 3, 4 y 5, parlamentos N° 1, 2, 3, 5, 7 y 10) siguen el mismo reloj de 80 minutos. La ronda de lectura inicial se hace solo con los parlamentos del curso, en orden.</p>
-      <h3>Qué revisar al pasar</h3>
-      <table class="tabla">
-        <tr><th>Minuto</th><th>Grupo 1</th><th>Grupo 2</th><th>Grupo 3</th><th>Grupo 4</th><th>Grupo 5</th></tr>
-        <tr><td>25</td><td>El cardón 3D ya se ve; brazos hacia arriba</td><td>Plano con vacuola grande y las 7 estructuras</td><td>Definiciones: dicen qué es, sin la palabra</td><td>Paleta elegida y logo en marcha</td><td>Plano a escala con los 5 sectores</td></tr>
-        <tr><td>45</td><td>Libro en Storybook, imágenes de la Quebrada</td><td>Carteles comparados y corregidos</td><td>Pedido del rosco pegado en la IA</td><td>Stickers generados</td><td>Materiales repartidos</td></tr>
-        <tr><td>60</td><td colspan="5">Todos en ensayo: escuchar un parlamento por dupla. Corregir errores conceptuales en el momento (desierto, fotosíntesis de noche, «el cardón no respira»).</td></tr>
-        <tr><td>75</td><td colspan="5">Registro descargado y foto o captura entregada. Confirmar quién trae qué el martes 10.</td></tr>
-      </table>
-      <h3>Progreso de esta computadora</h3>
-      <p style="font-size:.92rem">Muestra lo que se tildó en esta máquina. Para ver un grupo, mírelo en su computadora.</p>
-      <div id="progresoDoc"></div>
-      <div style="margin-top:14px"><button class="btn gris" id="borrarTodo">Borrar todo lo guardado en esta computadora</button></div>
-    </section>
-  </div>
-
   <p class="firma">Estación Kawsay · Proyecto interdisciplinario Biología y Teatro<br>Prof. Patricia Inés Castro (Biología) · Prof. Luciano Lera (Teatro) · Colegio Santo Tomás de Villanueva · 2026</p>
 </main>
 
@@ -704,7 +683,6 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
     panels.forEach(function(p){p.classList.toggle('activo',p.id===id);});
     btns.forEach(function(b){b.classList.toggle('activa',b.getAttribute('data-p')===id);});
     guarda('panel',id);
-    if(id==='p-doc')pintaDoc();
     window.scrollTo({top:document.getElementById('solapas').offsetTop-10,behavior:'smooth'});
   }
   btns.forEach(function(b){b.onclick=function(){mostrar(b.getAttribute('data-p'));};});
@@ -852,15 +830,6 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
       body:JSON.stringify({fecha:new Date().toLocaleString('es-AR'),quien:quien,grupo:NOMBRES[g],texto:armaRegistro(g)})})
     .then(function(){est.textContent='Enviado a la profe. Si no llega, bajá la copia.';b.disabled=false;})
     .catch(function(){est.textContent='Sin internet: bajá la copia y pasala.';b.disabled=false;});};});
-
-  /* ---------- docente ---------- */
-  function pintaDoc(){var h='<table class="tabla"><tr><th>Grupo</th><th>Pasos tildados</th></tr>';
-    ['g1','g2','g3','g4','g5'].forEach(function(g){var tot=document.querySelectorAll('#p-'+g+' .check[data-lista] li').length;var st=lee('lista-'+g,{});
-      var n=Object.keys(st).filter(function(k){return st[k];}).length;h+='<tr><td>'+NOMBRES[g]+'</td><td>'+n+' de '+tot+'</td></tr>';});
-    document.getElementById('progresoDoc').innerHTML=h+'</table>';}
-  var borrar=document.getElementById('borrarTodo'),conf=false;
-  borrar.onclick=function(){if(!conf){conf=true;borrar.textContent='¿Seguro? Toca otra vez para borrar';setTimeout(function(){conf=false;borrar.textContent='Borrar todo lo guardado en esta computadora';},4000);return;}
-    try{Object.keys(localStorage).forEach(function(k){if(k.indexOf(PRE)===0)localStorage.removeItem(k);});}catch(e){}location.reload();};
 
   /* ---------- inicio ---------- */
   sel.value=lee('yo','');pintaGuion();saludo();selE.value=(porQuien(sel.value)[0]||PARL[0]).n;pintaAtril();
