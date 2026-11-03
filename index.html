@@ -596,7 +596,7 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
 (function(){
   /* ---------- almacenamiento seguro ---------- */
   /* URL de la aplicacion web de Apps Script donde caen los registros */
-  var ENDPOINT='';
+  var ENDPOINT='https://script.google.com/macros/s/AKfycbyxTYg5lF8E4mUl7FY8uiHKFza_myv7lLUxvvKTipC_hGwumNewG66CY3pnsnu4WMrj/exec';
   var PRE='kawsay3_';
   function lee(k,d){try{var v=localStorage.getItem(PRE+k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
   function guarda(k,v){try{localStorage.setItem(PRE+k,JSON.stringify(v));}catch(e){}}
