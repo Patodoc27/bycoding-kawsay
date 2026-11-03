@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller ByCoding · Kawsay</title>
+<meta name="description" content="Guía de clase para el taller ByCoding del equipo Kawsay: cada grupo le pide a una IA la herramienta que va a proyectar en la muestra del Jardín Botánico de Altura de Tilcara.">
+<style>
+:root{
+  --papel:#f6efe2; --papel2:#fdf9f0; --tinta:#32291f; --suave:#6e5f4c;
+  --ocre:#b46a32; --ocre2:#c97f45; --cardon:#4e7c3f; --tallo:#2f5233;
+  --cielo:#2f6e8e; --noche:#1e2a44; --sol:#e0a11f; --borde:#d9cbb2;
+  --marca:#8f3d1f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--papel);color:var(--tinta);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2}
+.portada{background:linear-gradient(180deg,var(--noche) 0%,#2a3a5c 55%,var(--papel) 100%);color:#f5f1e8;padding:34px 0 0;position:relative;overflow:hidden}
+.portada .wrap{position:relative;z-index:2;padding-bottom:26px}
+.estrellas{position:absolute;inset:0;pointer-events:none}
+.kicker{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#e8c98f;font-weight:700}
+.portada h1{font-size:2.5rem;margin:8px 0 4px}
+.portada h1 em{color:#a8d98a;font-style:italic}
+.portada p.sub{color:#cfd8ea;max-width:760px;font-size:1.02rem}
+.chip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:3px 12px;font-size:.8rem;margin:12px 8px 0 0;color:#e8ecf5}
+.cardones{position:absolute;right:4%;bottom:-4px;width:190px;opacity:.95}
+section{margin-top:38px}
+.solapas{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:50;background:var(--papel);padding:12px 0 10px;border-bottom:2px solid var(--borde)}
+.solapas a{background:var(--papel2);border:1.5px solid var(--borde);color:var(--tinta);text-decoration:none;border-radius:10px;padding:6px 14px;font-size:.88rem;font-weight:600}
+.solapas a:hover{border-color:var(--ocre);color:var(--ocre)}
+.rutina{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.paso{background:var(--papel2);border:1.5px solid var(--borde);border-radius:14px;padding:16px 16px 14px;position:relative}
+.paso .n{position:absolute;top:-13px;left:14px;background:var(--marca);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+.paso b{color:var(--marca);display:block;margin:2px 0 4px;font-size:1.02rem}
+.paso p{font-size:.9rem;color:var(--suave)}
+.bloque{background:var(--papel2);border:1.5px solid var(--borde);border-radius:14px;padding:18px 20px;margin-top:16px}
+.bloque h3{color:var(--marca);margin-bottom:8px;font-size:1.15rem}
+.bloque p,.bloque li{font-size:.95rem}
+.bloque ul,.bloque ol{padding-left:22px}
+.bloque li{margin-bottom:5px}
+.timeline{margin-top:14px;border-left:3px solid var(--ocre2);padding-left:18px}
+.tl{margin-bottom:14px}
+.tl .min{display:inline-block;background:var(--noche);color:#f5f1e8;border-radius:6px;padding:1px 9px;font-size:.78rem;font-weight:700;letter-spacing:.05em}
+.tl b{display:block;margin:3px 0 2px}
+.tl p{font-size:.92rem;color:var(--suave)}
+.ficha{background:#fff;border:2px solid var(--borde);border-radius:16px;margin-top:26px;overflow:hidden}
+.ficha__cab{background:linear-gradient(90deg,var(--tallo),var(--cardon));color:#f2f6ec;padding:14px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ficha__cab .eq{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:2px 10px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.ficha__cab h3{font-size:1.3rem}
+.ficha__cab small{display:block;color:#cfe0c4;font-weight:400}
+.ficha__cuerpo{padding:18px 22px 20px}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+@media(max-width:760px){.fila,.rutina{grid-template-columns:1fr}}
+.mini h4,.audit h4,.hablar h4{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre);margin-bottom:6px}
+.mini{background:#f2ecdf;border:1.5px dashed var(--borde);border-radius:12px;padding:12px 14px}
+.mini ul{padding-left:18px}.mini li{font-size:.88rem;margin-bottom:4px;color:#4a4034}
+.pedido{position:relative;background:#fdf6ea;border:1.5px solid var(--ocre2);border-radius:12px;margin-top:14px}
+.pedido .tag{position:absolute;top:-11px;left:14px;background:var(--ocre);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.1em;padding:2px 10px;border-radius:6px;text-transform:uppercase}
+.pedido pre{white-space:pre-wrap;font-family:inherit;font-size:.92rem;padding:20px 18px 16px;color:#3c3126}
+.btnCopiar{position:absolute;top:-12px;right:14px;background:var(--noche);color:#f5f1e8;border:none;border-radius:8px;padding:5px 13px;font-size:.78rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+.btnCopiar:hover{background:#2c3d63}
+.btnCopiar.ok{background:var(--cardon)}
+.audit{background:#eef4ea;border:1.5px solid #b9cfae;border-radius:12px;padding:12px 14px}
+.audit ul{list-style:none;padding-left:2px}
+.audit li{font-size:.88rem;margin-bottom:4px;padding-left:24px;position:relative}
+.audit li::before{content:"";position:absolute;left:2px;top:3px;width:13px;height:13px;border:2px solid var(--cardon);border-radius:4px;background:#fff}
+.hablar{background:#eaf1f6;border:1.5px solid #b5cddd;border-radius:12px;padding:12px 14px}
+.hablar ul{padding-left:18px}.hablar li{font-size:.88rem;margin-bottom:4px;color:#33455a}
+.hablar .voz{display:block;background:#fff;border-left:4px solid var(--cielo);padding:8px 12px;margin-top:8px;font-size:.9rem;border-radius:0 8px 8px 0;font-style:italic;color:#2c3e50}
+.notabene{font-size:.82rem;color:var(--suave);margin-top:10px;font-style:italic}
+.paleta{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:12px}
+.tono{border-radius:12px;overflow:hidden;border:1.5px solid var(--borde);background:#fff}
+.tono .muestra{height:52px}
+.tono .info{padding:7px 10px}
+.tono .info b{font-size:.82rem;display:block}
+.tono .info span{font-size:.74rem;color:var(--suave);font-family:Consolas,monospace}
+.reglas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(max-width:760px){.reglas{grid-template-columns:1fr}}
+.regla{border-radius:12px;padding:12px 14px;font-size:.88rem}
+.regla.si{background:#eef4ea;border:1.5px solid #b9cfae}
+.regla.no{background:#f9ece5;border:1.5px solid #e0b9a4}
+.regla b{display:block;margin-bottom:4px}
+.regla.si b{color:var(--tallo)}.regla.no b{color:var(--marca)}
+.firma{margin-top:44px;padding-top:14px;border-top:1.5px solid var(--borde);font-size:.82rem;color:var(--suave);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media print{
+  body{background:#fff}
+  .portada{background:var(--noche)!important;color:#fff}
+  .solapas{display:none}
+  .ficha,.bloque{break-inside:avoid}
+  .ficha{page-break-before:always;border-radius:0;border-color:#999}
+  .ficha:first-of-type{page-break-before:avoid}
+  .btnCopiar{display:none}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="portada">
+  <div class="estrellas" id="estrellas"></div>
+  <div class="wrap">
+    <div class="kicker">Kawsay · Muestra del viaje a Tilcara · Biología y Teatro</div>
+    <h1>Taller <em>ByCoding</em></h1>
+    <p class="sub">Cada equipo le pide a la inteligencia artificial la herramienta que va a proyectar en el stand. Ustedes <b>dirigen</b> (dicen exactamente qué quieren), <b>auditan</b> (prueban que funcione) y <b>explican</b> lo que se ve en la pantalla.</p>
+    <span class="chip">Dirigir · Auditar · Registrar · Publicar</span>
+    <span class="chip">Una ficha por equipo</span>
+    <span class="chip">Clase de 80 minutos</span>
+  </div>
+  <svg class="cardones" viewBox="0 0 190 210" aria-hidden="true">
+    <g fill="#0f1830" opacity=".9">
+      <path d="M88 210 V60 q0-18 17-18 t17 18 V210 Z"/>
+      <path d="M62 210 v-70 q0-14 12-14 t12 14 V210 Z"/>
+      <path d="M122 210 v-56 q0-12 10-12 t10 12 V210 Z"/>
+      <path d="M45 210 v-40 q0-10 8-10 t8 10 V210 Z"/>
+      <path d="M150 210 v-46 q0-11 9-11 t9 11 V210 Z"/>
+    </g>
+    <g stroke="#1c2c4e" stroke-width="3" fill="none" opacity=".9">
+      <path d="M70 140 q-20-6 -20-30 q0-16 14-16"/>
+      <path d="M122 60 q22-4 22-30 q0-14 -12-14"/>
+      <path d="M132 154 q18-4 18-24 q0-12 -10-12"/>
+    </g>
+  </svg>
+</header>
+
+<div class="wrap">
+
+<nav class="solapas">
+  <a href="#clase">Plan de la clase</a>
+  <a href="#que-es">Qué es bycoding</a>
+  <a href="#diseno">Diseño gráfico</a>
+  <a href="#f-cardon">Ficha · Cardón 3D</a>
+  <a href="#f-celula">Ficha · Célula</a>
+  <a href="#f-rosco">Ficha · Rosco y croquis</a>
+  <a href="#f-stickers">Ficha · Stickers</a>
+  <a href="#f-maqueta">Ficha · Maqueta del Jardín</a>
+  <a href="#f-guion">Ficha · Guion de 30 s</a>
+</nav>
+
+<!-- ============================ PLAN DE LA CLASE ============================ -->
+<section id="clase">
+  <h2>Plan de la clase · 80 minutos</h2>
+  <p style="margin-top:6px;color:var(--suave)">Vos atendés los cinco grupos en simultáneo. La clase está pensada para que cada equipo trabaje solo la mayor parte del tiempo y vos rotés de a uno.</p>
+  <div class="timeline">
+    <div class="tl"><span class="min">0 – 10 min</span><b>Todos juntos: qué es bycoding</b>
+      <p>Explicás con UN ejemplo en vivo (ver abajo): se le pide algo a la IA con una especificación precisa, la IA lo produce, y nosotros probamos que funcione. Idea central: <i>la IA escribe, ustedes deciden si está bien</i>.</p></div>
+    <div class="tl"><span class="min">10 – 20 min</span><b>Cada equipo lee su ficha y arma su pedido</b>
+      <p>Cada grupo recibe su ficha impresa o en pantalla. Completan el pedido con sus propias palabras (pueden usar el texto de la ficha tal cual) y lo anotan. Vos pasás por los cinco puestos y revisás que el pedido diga QUÉ quieren y QUÉ tiene que cumplir.</p></div>
+    <div class="tl"><span class="min">20 – 55 min</span><b>Piden, prueban, auditan</b>
+      <p>Cada equipo pega su pedido en la IA, mira el resultado y lo contrasta con la lista «Auditalo» de su ficha. Si algo falta o está mal, no empiezan de nuevo: le piden a la IA el cambio puntual («agregá el rótulo de la vacuola», «de noche tienen que verse estrellas»). Los de diseño gráfico trabajan sobre papel/Canva con la paleta de la sección Diseño.</p></div>
+    <div class="tl"><span class="min">55 – 70 min</span><b>Rotación de la profe + ensayo del guion</b>
+      <p>Vos pasás por cada puesto: que te muestren la herramienta andando y te lean su guion de 30 segundos en voz alta. Corregís contenido ahí mismo (ellos anotan y después le piden el ajuste a la IA).</p></div>
+    <div class="tl"><span class="min">70 – 80 min</span><b>Diario de cambios y tarea</b>
+      <p>Cada equipo escribe tres líneas: qué pidieron, qué probaron, qué les falta. Ese diario es la evidencia del bycoding para la nota. Tarea: terminar la herramienta y traerla publicada o en pendrive.</p></div>
+  </div>
+</section>
+
+<!-- ============================ QUÉ ES BYCODING ============================ -->
+<section id="que-es">
+  <h2>Qué es bycoding · para explicarlo en 2 minutos</h2>
+  <div class="rutina">
+    <div class="paso"><span class="n">1</span><b>Dirigir</b><p>Escribir el pedido como una especificación: qué quiero, qué tiene que tener, qué NO quiero, en qué formato. Cuanto más preciso, mejor sale.</p></div>
+    <div class="paso"><span class="n">2</span><b>Generar</b><p>La IA produce la herramienta. Ustedes no tocan el código: si algo falta, se lo piden de vuelta con palabras.</p></div>
+    <div class="paso"><span class="n">3</span><b>Auditar</b><p>Probar el resultado con la lista «Auditalo»: una prueba normal, una de borde, una trampa. Si falla, se pide la corrección puntual.</p></div>
+    <div class="paso"><span class="n">4</span><b>Registrar y publicar</b><p>Anotar en el diario qué pidieron y qué corrigieron. Publicar la página o llevarla lista para el televisor del stand.</p></div>
+  </div>
+  <div class="bloque">
+    <h3>El ejemplo en vivo (minutos 0–10)</h3>
+    <p>Pedile a la IA en el proyector: <i>«Generame un solo archivo HTML con un cielo que cambie de día a noche cuando muevo un control de hora: de día celeste con un sol, de noche azul oscuro con estrellas.»</i> Probás el resultado ahí mismo (¿a las 3 h está oscuro? ¿a las 12 h hay sol?), y contás: <b>eso es bycoding — el cardón en 3D de la cápsula también está hecho así, por código, no es un modelo descargado</b>. Después cada equipo hace lo mismo con su ficha.</p>
+  </div>
+  <div class="bloque">
+    <h3>Reglas del pedido (para pegar en el pizarrón)</h3>
+    <ul>
+      <li><b>Un pedido = contexto + qué quiero + qué debe tener + restricciones + formato.</b> Falta una parte = falta algo en el resultado.</li>
+      <li>Pedir siempre <b>un solo archivo HTML</b>, que ande sin internet: se proyecta en el televisor y se puede publicar tal cual.</li>
+      <li>El contenido sale del <b>material Kawsay</b>: si la IA inventa o se equivoca, la prueba trampa lo descubre.</li>
+      <li>Corregir = pedir el cambio puntual, no volver a pedir todo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ DISEÑO GRÁFICO ============================ -->
+<section id="diseno">
+  <h2>Diseño gráfico · qué les enseñás (stickers, distintivos, tarjetas)</h2>
+  <p style="margin-top:6px;color:var(--suave)">Una identidad visual son tres decisiones: <b>una paleta</b> (los colores del paisaje de la Quebrada), <b>un motivo</b> (el cardón) y <b>una regla de repetición</b> (todo se ve de la misma familia). Si un sticker parece de otra feria, está mal.</p>
+  <div class="paleta">
+    <div class="tono"><div class="muestra" style="background:#b46a32"></div><div class="info"><b>Ocre del cerro</b><span>#B46A32 · color principal</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#c97f45"></div><div class="info"><b>Arena tostada</b><span>#C97F45 · acentos cálidos</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#e3d2b5"></div><div class="info"><b>Piedra clara</b><span>#E3D2B5 · fondos</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#4e7c3f"></div><div class="info"><b>Verde cardón</b><span>#4E7C3F · el protagonista</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#2f5233"></div><div class="info"><b>Verde tallo</b><span>#2F5233 · sombras y textos</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#2f6e8e"></div><div class="info"><b>Cielo de la Quebrada</b><span>#2F6E8E · contraste frío</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#1e2a44"></div><div class="info"><b>Noche</b><span>#1E2A44 · textos sobre claro</span></div></div>
+    <div class="tono"><div class="muestra" style="background:#f5f1e8;border-bottom:1px solid #ddd"></div><div class="info"><b>Flor del cardón</b><span>#F5F1E8 · luces y márgenes</span></div></div>
+  </div>
+  <div class="reglas">
+    <div class="regla si"><b>Sí</b><ul style="padding-left:18px"><li>4 colores como máximo por pieza: un fondo, un protagonista, un acento, el texto.</li><li>El cardón siempre columnar, con brazos hacia arriba (candelabro) — es el motivo Kawsay.</li><li>Texto corto y grande: un sticker se lee a un brazo de distancia.</li><li>Misma paleta y mismo estilo en stickers, tarjetas y distintivos.</li></ul></div>
+    <div class="regla no"><b>No</b><ul style="padding-left:18px"><li>Cactus de maceta genérico (barril redondo, enano) — el cardón es una columna de metros.</li><li>Más de 4–5 colores o degradés que no existen en el paisaje.</li><li>Emojis del sistema: se dibujan propios, con la paleta.</li><li>Texto largo en una imagen chiquita.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============================ FICHA CARDÓN 3D ============================ -->
+<section class="ficha" id="f-cardon">
+  <div class="ficha__cab">
+    <div><h3>Animación 3D del cardón + libro de la leyenda</h3><small>Coria, José Valentín y Scattolini Montero, Franco · 1°A</small></div>
+    <span class="eq">Ficha A</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (3 min)</h4>
+        <ul>
+          <li>Que un modelo 3D puede hacerse <b>por código</b>: la cápsula de la clase anterior tiene el cardón programado pieza por pieza (tallo con costillas, cúpula, brazos, espinas).</li>
+          <li>Que el pedido describe la <b>forma real del cardón</b> mirando las fotos del viaje, no «un cactus».</li>
+          <li>La idea biológica a animar: <b>de noche los estomas se abren</b> y entra dióxido de carbono; <b>de día se cierran</b> y el tallo verde hace fotosíntesis.</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>El cardón gira, tiene brazos hacia arriba, costillas y espinas claras (no es un cactus de maceta).</li>
+          <li>«Cortar el tallo» muestra 4 capas con rótulo: piel con cera, parte verde, reserva de agua, madera.</li>
+          <li>Prueba de borde: a las 3 h la escena está oscura con estrellas y los estomas abiertos; a las 12 h hay sol y están cerrados.</li>
+          <li>Prueba trampa: si la IA dice que «de día entra dióxido de carbono», está mal — el material dice que entra de noche.</li>
+          <li>La animación automática dura entre 30 y 45 s y vuelve a empezar sola.</li>
+          <li>Es UN solo archivo HTML y anda sin internet.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">Pedido 1 · la animación</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año de secundaria. Generame UN solo archivo HTML autocontenido (que ande sin internet, con Three.js cargado dentro del archivo) para proyectar en un televisor en una muestra escolar.
+
+Escena: un cardón de la Quebrada de Humahuaca en 3D, hecho por código (no un modelo descargado): un tallo verde en forma de columna con costillas verticales, brazos que salen del tallo y suben como un candelabro, espinas claras y una cúpula arriba. Que gire despacio y se pueda arrastrar con el mouse.
+
+Botón «Cortar el tallo»: muestra el interior con 4 capas rotuladas — piel con cera, parte verde con cloroplastos, reserva de agua (vacuolas) y madera — y un botón para volver a armarlo.
+
+Un control deslizante «Hora del día» (0 a 24): de día el cielo es celeste con sol y luz cálida; de noche es azul oscuro con estrellas y una luna. De noche (20 a 6 h) los estomas del tallo se dibujan abiertos y se ven puntitos de dióxido de carbono entrando; de día se dibujan cerrados y aparece el texto «fotosíntesis en la capa verde del tallo».
+
+Un botón «Presentar» que recorra automáticamente noche → amanecer → día en 40 segundos en bucle, para dejarlo corriendo en el televisor.
+
+Estilo: paisaje de la Quebrada (cerros ocres, cielo limpio), colores sobrios, todo el texto en español de Argentina, en ustedes.</pre>
+    </div>
+    <div class="pedido"><span class="tag">Pedido 2 · el libro de la leyenda</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Generame UN solo archivo HTML autocontenido: un libro ilustrado interactivo de la leyenda de los guardianes de la Quebrada, para proyectar en una muestra escolar de 1° año.
+
+6 a 8 escenas, una por página, con flechas para pasarlas: los guerreros omaguacas suben a vigilar los cerros; días y noches sin moverse; el sol que los quema y el viento helado; la Pachamama los mira con ternura; los adormece despacio y los transforma en cardones; los cardones siguen de pie cuidando la Quebrada.
+
+Cada escena: una ilustración dibujada con SVG dentro del código (paisaje de la Quebrada: cerros ocres, cardones columnares con brazos hacia arriba — nunca cactus de maceta ni desierto tipo película), 2 o 3 líneas de texto breve en español de Argentina, y una línea de «para contar» al pie con lo que hay que decirle a los visitantes.
+
+Al final, una página «Leyenda y ciencia»: la leyenda explica el origen con hechos maravillosos y merece respeto; la ciencia explica el mismo cardón con observaciones y pruebas (las espinas son hojas transformadas que protegen a la planta y le hacen perder menos agua). Un solo archivo, que ande sin internet.</pre>
+    </div>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Para contar en la pantalla (30 s)</h4>
+        <span class="voz">«Este cardón está hecho por código: nosotros le pedimos a la IA cada pieza y después lo corregimos. El cardón no tiene hojas: hace fotosíntesis en el tallo verde. Miren los estomas: de noche se abren para tomar dióxido de carbono sin perder agua, y de día se cierran y con la luz fabrican glucosa. Un cardón de 10 metros puede tener 180 años.»</span>
+        <ul><li>La última frase de la página «Leyenda y ciencia» se lee tal cual si preguntan por la leyenda.</li></ul>
+      </div>
+      <div class="mini"><h4>Registro (diario de cambios)</h4>
+        <ul><li>Anotar: qué pidieron, qué salió mal la primera vez, qué corrección pidieron.</li><li>Si la IA dibuja un cactus redondo o desierto de película → corrección: «el cardón es columnar, de la Quebrada de Humahuaca».</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FICHA CÉLULA ============================ -->
+<section class="ficha" id="f-celula">
+  <div class="ficha__cab">
+    <div><h3>Célula vegetal interactiva (apoyo de la maqueta)</h3><small>García, Gastón y Flores, Franco Tomás · 1°A</small></div>
+    <span class="eq">Ficha B</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (3 min)</h4>
+        <ul>
+          <li>La maqueta es física; la herramienta digital es el <b>apoyo en pantalla</b>: el visitante toca cada parte y ve su función.</li>
+          <li>Rigor: son 7 estructuras del material (ni más ni menos) y la vacuola es GRANDE (es el tanque de agua).</li>
+          <li>La pregunta que tienen que saber responder: ¿por qué la célula del cardón tiene cloroplastos <b>y también</b> mitocondrias?</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>Aparecen las 7 estructuras: pared celular, membrana, citoplasma, núcleo, vacuola grande, cloroplastos, mitocondrias.</li>
+          <li>Al tocar cada parte sale el nombre y la función en pocas palabras, correcta según el material.</li>
+          <li>Prueba de borde: tocar dos veces la misma parte no rompe nada; el modo «practicar» oculta los nombres.</li>
+          <li>Prueba trampa: si la IA pone la vacuola chiquita o dice que las mitocondrias hacen fotosíntesis, está mal.</li>
+          <li>Un solo archivo HTML, legible proyectado (letra grande).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">El pedido</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año. Generame UN solo archivo HTML autocontenido para proyectar en un televisor en una muestra escolar: una célula eucariota vegetal del tallo verde del cardón, dibujada grande con SVG dentro del código.
+
+Estructuras exactamente estas 7: pared celular, membrana, citoplasma, núcleo, vacuola (grande, ocupa gran parte de la célula), cloroplastos (varios, verdes, solo en la parte verde) y mitocondrias. La vacuola tiene que ser claramente la estructura más grande.
+
+Interactividad: al hacer clic o tocar cada estructura, aparece una tarjeta con su nombre y su función en pocas palabras: la pared celular sostiene la célula; la membrana controla qué entra y sale; el citoplasma es el interior donde están las partes; el núcleo guarda el ADN con la información del cardón; la vacuola es el tanque de reserva de agua; en los cloroplastos se hace la fotosíntesis (tienen clorofila); en las mitocondrias se hace la respiración celular, que libera la energía de la glucosa.
+
+Un botón «Practicar» que oculte los nombres para que el visitante adivine cada parte, y otro para volver a verlos. Letra grande, colores con la paleta del proyecto (verdes #4E7C3F y #2F5233, ocres #B46A32, fondo claro). Español de Argentina.</pre>
+    </div>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Para contar en la pantalla (30 s)</h4>
+        <span class="voz">«La célula del cardón es eucariota vegetal: tiene lo mismo que la célula animal y suma la pared, los cloroplastos y una vacuola grande que es su tanque de agua. Tiene cloroplastos para fabricar glucosa y también mitocondrias, porque la respiración celular libera la energía de esa glucosa de día y de noche.»</span>
+      </div>
+      <div class="mini"><h4>Registro (diario de cambios)</h4>
+        <ul><li>Anotar qué estructura se dibujó mal la primera vez y cómo la corrigieron con el pedido puntual.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FICHA ROSCO + CROQUIS ============================ -->
+<section class="ficha" id="f-rosco">
+  <div class="ficha__cab">
+    <div><h3>Rosco tipo Pasapalabra + croquis interactivo</h3><small>Mamaní Torres, Isaías y Giménez, Juan Bautista · 1°B</small></div>
+    <span class="eq">Ficha C</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (3 min)</h4>
+        <ul>
+          <li>Una buena definición de rosco: empieza por «contiene la letra X» o «con la X», es breve y la respuesta es UNA palabra del material.</li>
+          <li>Ustedes conducen el juego con los visitantes: el rosco tiene que funcionar perfecto (tiempo, aciertos, pasapalabra).</li>
+          <li>El croquis es su mapa para hablar: cada sector tiene que estar donde está en el material.</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>El rosco tiene todas las letras que se usan, muestra la definición, cuenta aciertos/errores y permite «pasapalabra».</li>
+          <li>Las respuestas son términos del material Kawsay (estoma, cloroplasto, autótrofo, cardonal, Prepuna, Pachamama…).</li>
+          <li>El croquis muestra la entrada, los 5 sectores con sus nombres y la piedra campana en medio del sector de hierbas aromáticas y medicinales.</li>
+          <li>Prueba trampa: si la IA pone la piedra campana en los cactarios o inventa un sexto sector, está mal.</li>
+          <li>Un solo archivo HTML, letra grande para el televisor.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">Pedido 1 · el rosco</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año. Generame UN solo archivo HTML autocontenido para conducir un rosco tipo Pasapalabra con los visitantes de una muestra escolar, proyectado en un televisor.
+
+Un círculo con las letras que se usan. Se toca una letra, aparece la definición en grande, y hay botones «Correcto», «Incorrecto» y «Pasapalabra». Marcador de aciertos y errores, y las pasapalabras vuelven al final. Que se pueda reiniciar sin recargar.
+
+Definiciones (usá estas, breves y fieles): E — poro diminuto de la piel del cardón por donde entran y salen gases (estoma) · C — organelo verde donde el cardón hace fotosíntesis (cloroplasto) · A — ser vivo que fabrica su propio alimento (autótrofo) · C — grupo de cardones que crece junto en la estepa (cardonal) · P — región de laderas y quebradas secas entre los 2000 y los 3500 m donde vive el cardón (Prepuna) · P — la Madre Tierra de la leyenda, que transformó a los guerreros en cardones (Pachamama) · P — roca volcánica del Jardín que suena al golpearla (piedra campana) · M — árbol de hojas colgantes que también hace fotosíntesis en el Jardín (molle) · V — estructura de la célula vegetal que funciona como tanque de reserva de agua (vacuola) · N — parte de la célula que guarda el ADN (núcleo) · C — pigmento que capta la energía de la luz (clorofila) · B — moléculas que forman a los seres vivos (biomoléculas) · H — característica de mantener estables las condiciones internas, como el agua del cardón (homeostasis) · I — característica de percibir estímulos y responder, como abrir o cerrar estomas (irritabilidad) · J — ciudad donde queda el Jardín Botánico de Altura (Jujuy) · T — la antigua fortaleza dentro de cuyo predio está el Jardín (Tilcara / el Pucará de Tilcara).
+
+Colores con la paleta del proyecto (ocres y verdes, fondo claro). Español de Argentina.</pre>
+    </div>
+    <div class="pedido"><span class="tag">Pedido 2 · el croquis</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año. Generame UN solo archivo HTML autocontenido para proyectar en un televisor: el croquis interactivo del Jardín Botánico de Altura de Tilcara, dibujado con SVG dentro del código, con la entrada abajo y los 5 sectores con colores distintos.
+
+Los 5 sectores, con estos contenidos al tocarlos: Cactarios (los cardones y otras cactáceas como las tunas) · Hierbas de altura (con la estación meteorológica) · Cultivos andinos · Hierbas aromáticas y medicinales (con la piedra campana dibujada en el medio: una roca volcánica de 2,5 toneladas traída del cerro Campanario que suena como campana) · Árboles y arbustos (con un molle).
+
+Al tocar cada sector se agranda una tarjeta con su nombre y qué hay ahí, en 2 o 3 líneas breves. Un cartel visible con «Jardín Botánico de Altura de Tilcara · 2580 m s. n. m.». Estilo croquis claro, paleta de ocres y verdes, letra grande. Español de Argentina.</pre>
+    </div>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Para contar en la pantalla (30 s)</h4>
+        <span class="voz">«Este es el Jardín Botánico de Altura de Tilcara: 3 hectáreas a 2580 metros sobre el nivel del mar, dentro del predio del Pucará. El sendero pasa por los cactarios, las hierbas de altura con su estación meteorológica, los cultivos andinos, las aromáticas — ahí está la piedra campana — y los árboles y arbustos. ¿Jugamos al rosco?»</span>
+      </div>
+      <div class="mini"><h4>Registro (diario de cambios)</h4>
+        <ul><li>Anotar qué definición salió ambigua y cómo la corrigieron (una definición = una sola respuesta).</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FICHA STICKERS ============================ -->
+<section class="ficha" id="f-stickers">
+  <div class="ficha__cab">
+    <div><h3>Plancha de stickers, tarjetas y distintivos</h3><small>Alves Ángel, Emma y Martínez, Isabella · 1°B</small></div>
+    <span class="eq">Ficha D</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (3 min)</h4>
+        <ul>
+          <li>Identidad visual = paleta + motivo + repetición. Revisar con ellas la sección «Diseño gráfico» de esta página: 4 colores por pieza, el cardón columnar como motivo, todo de la misma familia.</li>
+          <li>Que el logo Kawsay se diseña una vez y se repite en stickers, tarjetas y distintivos.</li>
+          <li>La IA les arma la plancha imprimible; ellas auditan tamaños, nombres y que el cardón sea el correcto.</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>El logo dice Kawsay y muestra un cardón columnar con brazos hacia arriba (no cactus de maceta).</li>
+          <li>La plancha entra en una hoja A4 para imprimir, con guías de corte.</li>
+          <li>Los stickers son del Jardín: cardón, piedra campana, tunas, molle, abejorro.</li>
+          <li>Las 10 tarjetas tienen logo, nombre y curso de cada integrante, en 9 × 5,5 cm.</li>
+          <li>Prueba trampa: si aparecen colores fuera de la paleta o un cactus redondo, se pide la corrección.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">El pedido</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año. Generame UN solo archivo HTML autocontenido con una plancha imprimible en A4 para una muestra escolar llamada Kawsay (palabra quechua que significa vida), sobre el cardón del Jardín Botánico de Altura de Tilcara.
+
+Arriba: el logo Kawsay dibujado con SVG — un cardón columnar con brazos hacia arriba dentro de un sello circular, con la palabra KAWSAY — usando esta paleta: verde cardón #4E7C3F, verde tallo #2F5233, ocre #B46A32, arena #C97F45, piedra clara #E3D2B5, noche #1E2A44.
+
+Abajo: una plancha de stickers circulares con guía de corte, todos dibujados con SVG y la misma paleta: el cardón, la piedra campana, una tuna, una rama de molle, un abejorro, y el logo chiquito. Y después 10 tarjetas de presentación de 9 × 5,5 cm con el logo, el nombre y el curso de cada integrante: Coria José Valentín (1°A), Scattolini Montero Franco (1°A), García Gastón (1°A), Flores Franco Tomás (1°A), Mamaní Torres Isaías (1°B), Giménez Juan Bautista (1°B), Alves Ángel Emma (1°B), Martínez Isabella (1°B), Abdo La Madrid Luz (1°B), Herrera Maité (1°B).
+
+Un botón «Imprimir» que saque la plancha lista para A4. Sin emojis: todo dibujado con la paleta. Español de Argentina.</pre>
+    </div>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Para contar (10 s, al entregar el sticker)</h4>
+        <span class="voz">«Gracias por visitar la estación Kawsay — kawsay significa vida en quechua. Este sticker es el cardón, la especie emblema del Jardín.»</span>
+      </div>
+      <div class="mini"><h4>Registro (diario de cambios)</h4>
+        <ul><li>Anotar qué versión del logo eligieron y por qué (decisión de diseño = también es bycoding).</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FICHA MAQUETA JARDÍN ============================ -->
+<section class="ficha" id="f-maqueta">
+  <div class="ficha__cab">
+    <div><h3>Croquis grande interactivo (apoyo de la maqueta)</h3><small>Abdo La Madrid, Luz y Herrera, Maité · 1°B</small></div>
+    <span class="eq">Ficha E</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (3 min)</h4>
+        <ul>
+          <li>La maqueta es física; la pantalla es el <b>croquis guía</b> que muestra al visitante dónde está cada cosa antes de mirar la maqueta.</li>
+          <li>Rigor de plano: 5 sectores, entrada, senderos, piedra campana en medio de aromáticas; cardones de distintos tamaños en el cactario, un molle en árboles.</li>
+          <li>Modo presentación: que cada sector se resalte solo, en el orden del recorrido.</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>Aparecen los 5 sectores, la entrada, los senderos y la piedra campana en el sector correcto.</li>
+          <li>El cartel dice «Jardín Botánico de Altura de Tilcara · 2580 m s. n. m.».</li>
+          <li>El recorrido guiado resalta un sector por vez en orden.</li>
+          <li>Prueba trampa: si falta la estación meteorológica en hierbas de altura, o el molle está en los cactarios, está mal.</li>
+          <li>Un solo archivo HTML, legible en el televisor.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">El pedido</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Somos estudiantes de 1° año. Generame UN solo archivo HTML autocontenido para proyectar en un televisor junto a nuestra maqueta física: el croquis interactivo del Jardín Botánico de Altura de Tilcara, dibujado con SVG dentro del código.
+
+Plano con la entrada abajo, los senderos y los 5 sectores con colores distintos: Cactarios (con cardones de distintos tamaños dibujados) · Hierbas de altura (con una estación meteorológica) · Cultivos andinos · Hierbas aromáticas y medicinales (con la piedra campana en el medio) · Árboles y arbustos (con un molle marcado).
+
+Al tocar un sector aparece una tarjeta con su nombre, qué plantas tiene y un dato: la piedra campana es una roca volcánica de 2,5 toneladas traída del cerro Campanario que suena como campana; el Jardín ocupa unas 3 hectáreas a 2580 m s. n. m.; fue creado en 1968 por la UBA y el gobierno de Jujuy.
+
+Botón «Recorrido» que resalte un sector por vez en el orden del sendero, para dejarlo corriendo en pantalla. Cartel visible: «Jardín Botánico de Altura de Tilcara · 2580 m s. n. m.». Paleta de ocres y verdes, letra grande. Español de Argentina.</pre>
+    </div>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Para contar en la pantalla (30 s)</h4>
+        <span class="voz">«Un jardín botánico no es una plaza: cultiva plantas identificadas para conservarlas, investigarlas y enseñar. El de Tilcara tiene 3 hectáreas dentro del predio del Pucará y cinco sectores. En nuestra maqueta se ve el mismo recorrido que en la pantalla.»</span>
+      </div>
+      <div class="mini"><h4>Registro (diario de cambios)</h4>
+        <ul><li>Anotar qué sector quedó mal ubicado la primera vez y cómo lo corrigieron.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FICHA GUION ============================ -->
+<section class="ficha" id="f-guion">
+  <div class="ficha__cab">
+    <div><h3>Guion de 30 segundos · para todos</h3><small>Cada equipo, sobre su propia tarea</small></div>
+    <span class="eq">Ficha F</span>
+  </div>
+  <div class="ficha__cuerpo">
+    <div class="fila">
+      <div class="mini"><h4>Qué les enseñás (2 min)</h4>
+        <ul>
+          <li>El bycoding también sirve para textos: el pedido lleva las ideas del material y la restricción «30 segundos en voz alta».</li>
+          <li>Auditar un texto = leerlo en voz alta con cronómetro y revisar que diga SOLO lo del material.</li>
+        </ul>
+      </div>
+      <div class="audit"><h4>Auditalo — chequeen</h4>
+        <ul>
+          <li>Dura 30 segundos leído en voz alta, sin apurarse.</li>
+          <li>No inventa nada: cada frase sale del material Kawsay.</li>
+          <li>Se entiende sin pantalla (si el visitante mira la maqueta, no la tele).</li>
+          <li>Termina invitando a mirar o tocar la herramienta.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pedido"><span class="tag">El pedido</span>
+      <button class="btnCopiar" type="button">Copiar</button>
+<pre>Escribime un guion de 30 segundos (unas 70 palabras) para explicar a los visitantes de una muestra escolar [NUESTRA TAREA], usando solo estas ideas del material Kawsay: [PEGAR ACÁ el párrafo del material que corresponde a nuestra tarea]. En español de Argentina, lenguaje de estudiantes de 1° año hablando a un visitante, sin palabras difíciles; que termine invitando a mirar la herramienta que proyectamos.</pre>
+    </div>
+    <p class="notabene">Ejemplo de «pegar»: el equipo del rosco pega el párrafo «El Jardín Botánico de Altura de Tilcara»; el de la célula, «Adentro del cardón: sus células»; el del cardón 3D, «Nutrición».</p>
+    <div class="fila" style="margin-top:16px">
+      <div class="hablar"><h4>Cómo se evalúa el guion</h4>
+        <ul>
+          <li>Uno lee, el otro cronometra. Si pasa de 35 s, recortan la frase menos importante (y anotan el cambio).</li>
+          <li>El visitante pregunta: el guion no reemplaza saber el material — los datos de cada ficha salen del material.</li>
+        </ul>
+      </div>
+      <div class="mini"><h4>Publicar para el televisor</h4>
+        <ul>
+          <li>La IA les entrega un archivo .html: se abre con doble clic en cualquier compu con Chrome, o se lleva en pendrive.</li>
+          <li>Si quieren publicarlo con link propio: subirlo a un repo nuevo de GitHub y activar Pages (la profe les muestra; es gratis).</li>
+          <li>Antes de la muestra: abrir el archivo con la compu SIN internet y probarlo entero.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="firma">
+  <span>Taller ByCoding · Estación Kawsay · Proyecto interdisciplinario Biología y Teatro</span>
+  <span>Prof. Patricia Inés Castro · Colegio Santo Tomás de Villanueva</span>
+</div>
+
+</div>
+
+<script>
+// estrellas de la portada
+(function(){
+  var box=document.getElementById('estrellas');
+  for(var i=0;i<90;i++){
+    var s=document.createElement('span');
+    var sz=(Math.random()*2.2+.6);
+    s.style.cssText='position:absolute;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:#fff;opacity:'+(Math.random()*.7+.2)+';left:'+(Math.random()*100)+'%;top:'+(Math.random()*70)+'%';
+    box.appendChild(s);
+  }
+})();
+// copiar pedidos
+var botones=document.querySelectorAll('.btnCopiar');
+for(var i=0;i<botones.length;i++){
+  botones[i].addEventListener('click',function(){
+    var b=this, txt=b.parentNode.querySelector('pre').textContent;
+    function ok(){var t=b.textContent;b.classList.add('ok');b.textContent='Copiado';setTimeout(function(){b.classList.remove('ok');b.textContent=t},1600)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){leg(txt);ok()})}
+    else{leg(txt);ok()}
+  });
+}
+function leg(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a)}
+</script>
+</body>
+</html>
