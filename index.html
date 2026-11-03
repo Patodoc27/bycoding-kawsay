@@ -142,6 +142,7 @@ p+p{margin-top:8px}
 .tips label{background:rgba(255,255,255,.08);border-radius:10px;padding:9px 11px;font-size:.9rem;display:flex;gap:8px;align-items:flex-start;cursor:pointer}
 .tips input{width:18px;height:18px;flex:none;margin-top:3px}
 .rondas{margin-top:12px;font-size:.92rem;color:#cdd6e6}
+.estado{font-size:.84rem;color:var(--tallo);margin-left:8px;align-self:center}
 /* registro */
 .reg{margin-top:16px;background:#fff;border:1px solid var(--borde);border-radius:12px;padding:14px 18px}
 .reg .acciones{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
@@ -229,7 +230,7 @@ p+p{margin-top:8px}
         <div class="tramo t2"><b>10 a 15</b>Elige tu nombre arriba, lee tu solapa completa y repartan el trabajo de la dupla.</div>
         <div class="tramo t3"><b>15 a 55</b>Producción: sigue la lista «Hoy, paso a paso» de tu solapa y tilda lo que terminás.</div>
         <div class="tramo t4"><b>55 a 70</b>Ensayo en duplas con el Modo ensayo: uno habla, el otro cronometra y chequea. Cambien.</div>
-        <div class="tramo t5"><b>70 a 80</b>Completa el registro, descárgalo y saca la foto o captura de lo que hicieron.</div>
+        <div class="tramo t5"><b>70 a 80</b>Completa el registro, envialo y saca la foto o captura de lo que hicieron.</div>
       </div>
 
       <h3>Reglas para trabajar solos</h3>
@@ -237,7 +238,7 @@ p+p{margin-top:8px}
         <li><span>Si te trabás, primero relee tu solapa y el material Kawsay. Si sigue sin salir, anota la duda en el registro y sigue con el paso siguiente hasta que llegue la profe.</span></li>
         <li><span>Toda la información sale del material Kawsay. Si la inteligencia artificial inventa un dato o se equivoca, se lo corrigen con un mensaje: «cambia tal cosa por tal otra».</span></li>
         <li><span>El cardón <b>no vive en un desierto</b>: vive en la Prepuna. Si alguna pieza dice «desierto», se corrige.</span></li>
-        <li><span>Lo que escriben en esta página queda guardado en esta computadora. Igual, descarguen el registro antes de irse.</span></li>
+        <li><span>Lo que escriben en esta página queda guardado en esta computadora. Igual, envíen el registro antes de irse.</span></li>
       </ul>
 
       <h3>Para la casa, todos los días hasta el viernes 13</h3>
@@ -333,7 +334,7 @@ Ilustraciones: cerros secos de colores ocre, rojo y violeta, cielo azul intenso,
         <li>El libro cuenta la leyenda tal cual, sin inventar partes, y todas las imágenes parecen la Quebrada.</li>
       </ul></div>
 
-      <div class="entrega"><b>Entrega de hoy:</b> captura del cardón 3D + enlace del libro + registro descargado.<br><b>Martes 10/11:</b> grabar el video de 30 a 45 segundos del modo «Presentar» (en Windows: tecla Windows + Alt + R para grabar la pantalla) y dejar el libro listo para el televisor.</div>
+      <div class="entrega"><b>Entrega de hoy:</b> captura del cardón 3D + enlace del libro + registro enviado.<br><b>Martes 10/11:</b> grabar el video de 30 a 45 segundos del modo «Presentar» (en Windows: tecla Windows + Alt + R para grabar la pantalla) y dejar el libro listo para el televisor.</div>
 
       <h3>Tus parlamentos</h3>
       <div class="misParl" data-quien="coria,scattolini"></div>
@@ -342,7 +343,7 @@ Ilustraciones: cerros secos de colores ocre, rojo y violeta, cielo azul intenso,
         <div class="campo"><label>Qué le pedimos a la IA y qué corregimos</label><textarea data-g="g1-ia"></textarea></div>
         <div class="campo"><label>Enlace del libro de la leyenda</label><input type="text" data-g="g1-link"></div>
         <div class="campo"><label>Qué falta para el martes 10 y quién lo hace</label><textarea data-g="g1-falta"></textarea></div>
-        <div class="acciones"><button class="btn" data-descargar="g1">Descargar registro</button></div>
+        <div class="acciones"><button class="btn" data-enviar="g1">Enviar registro a la profe</button><button class="btn gris" data-descargar="g1">Bajar copia</button><span class="estado" id="est-g1"></span></div>
       </div>
     </div>
   </div>
@@ -375,7 +376,7 @@ Ilustraciones: cerros secos de colores ocre, rojo y violeta, cielo azul intenso,
 
       <div class="ojo"><b>Ojo con la maqueta:</b> los cloroplastos van en esta célula porque es del tallo verde, donde se hace la fotosíntesis. Las mitocondrias van siempre: la célula respira de día y de noche.</div>
 
-      <div class="entrega"><b>Entrega de hoy:</b> foto del plano + carteles escritos + tabla de materiales + registro descargado.<br><b>Martes 10/11:</b> traer los materiales y armar la maqueta con los carteles pegados.</div>
+      <div class="entrega"><b>Entrega de hoy:</b> foto del plano + carteles escritos + tabla de materiales + registro enviado.<br><b>Martes 10/11:</b> traer los materiales y armar la maqueta con los carteles pegados.</div>
 
       <h3>Tus parlamentos</h3>
       <div class="misParl" data-quien="garcia,flores"></div>
@@ -383,7 +384,7 @@ Ilustraciones: cerros secos de colores ocre, rojo y violeta, cielo azul intenso,
       <div class="reg"><h3 style="margin-top:0">Registro de la dupla</h3>
         <div class="campo"><label>Qué hicimos hoy</label><textarea data-g="g2-hoy"></textarea></div>
         <div class="campo"><label>Dudas para la profe</label><textarea data-g="g2-dudas"></textarea></div>
-        <div class="acciones"><button class="btn" data-descargar="g2">Descargar registro</button></div>
+        <div class="acciones"><button class="btn" data-enviar="g2">Enviar registro a la profe</button><button class="btn gris" data-descargar="g2">Bajar copia</button><span class="estado" id="est-g2"></span></div>
       </div>
     </div>
   </div>
@@ -437,7 +438,7 @@ Ilustraciones: cerros secos de colores ocre, rojo y violeta, cielo azul intenso,
         <div class="campo"><label>Enlace o nombre del archivo del rosco</label><input type="text" data-g="g3-link"></div>
         <div class="campo"><label>Qué corregimos del rosco</label><textarea data-g="g3-corr"></textarea></div>
         <div class="campo"><label>Materiales del croquis y quién trae qué</label><textarea data-g="g3-mat"></textarea></div>
-        <div class="acciones"><button class="btn" data-descargar="g3">Descargar registro</button></div>
+        <div class="acciones"><button class="btn" data-enviar="g3">Enviar registro a la profe</button><button class="btn gris" data-descargar="g3">Bajar copia</button><span class="estado" id="est-g3"></span></div>
       </div>
     </div>
   </div>
@@ -513,7 +514,7 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
         <div class="campo"><label>Los 4 colores elegidos</label><input type="text" data-g="g4-col"></div>
         <div class="campo"><label>Qué le pedimos a la IA y qué corregimos</label><textarea data-g="g4-ia"></textarea></div>
         <div class="campo"><label>Qué falta y quién lo hace</label><textarea data-g="g4-falta"></textarea></div>
-        <div class="acciones"><button class="btn" data-descargar="g4">Descargar registro</button></div>
+        <div class="acciones"><button class="btn" data-enviar="g4">Enviar registro a la profe</button><button class="btn gris" data-descargar="g4">Bajar copia</button><span class="estado" id="est-g4"></span></div>
       </div>
     </div>
   </div>
@@ -555,7 +556,7 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
         <li>Entrada</li>
       </ul></div>
 
-      <div class="entrega"><b>Entrega de hoy:</b> foto del plano + tabla de materiales + registro descargado.<br><b>Jueves 5/11:</b> base y sectores pintados. <b>Martes 10/11:</b> maqueta terminada con cardones, molle, piedra campana y carteles.</div>
+      <div class="entrega"><b>Entrega de hoy:</b> foto del plano + tabla de materiales + registro enviado.<br><b>Jueves 5/11:</b> base y sectores pintados. <b>Martes 10/11:</b> maqueta terminada con cardones, molle, piedra campana y carteles.</div>
 
       <h3>Tus parlamentos</h3>
       <div class="misParl" data-quien="abdo,herrera"></div>
@@ -563,7 +564,7 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
       <div class="reg"><h3 style="margin-top:0">Registro de la dupla</h3>
         <div class="campo"><label>Qué hicimos hoy</label><textarea data-g="g5-hoy"></textarea></div>
         <div class="campo"><label>Dudas para la profe</label><textarea data-g="g5-dudas"></textarea></div>
-        <div class="acciones"><button class="btn" data-descargar="g5">Descargar registro</button></div>
+        <div class="acciones"><button class="btn" data-enviar="g5">Enviar registro a la profe</button><button class="btn gris" data-descargar="g5">Bajar copia</button><span class="estado" id="est-g5"></span></div>
       </div>
     </div>
   </div>
@@ -594,6 +595,8 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
 <script>
 (function(){
   /* ---------- almacenamiento seguro ---------- */
+  /* URL de la aplicacion web de Apps Script donde caen los registros */
+  var ENDPOINT='';
   var PRE='kawsay3_';
   function lee(k,d){try{var v=localStorage.getItem(PRE+k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
   function guarda(k,v){try{localStorage.setItem(PRE+k,JSON.stringify(v));}catch(e){}}
@@ -823,8 +826,7 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
 
   /* ---------- descargar registro ---------- */
   var NOMBRES={g1:'Grupo 1 · Coria y Scattolini',g2:'Grupo 2 · García y Flores',g3:'Grupo 3 · Mamaní y Giménez',g4:'Grupo 4 · Alves y Martínez',g5:'Grupo 5 · Abdo y Herrera'};
-  document.querySelectorAll('[data-descargar]').forEach(function(b){b.onclick=function(){
-    var g=b.getAttribute('data-descargar');var panel=document.getElementById('p-'+g);var out=['Registro Kawsay · '+NOMBRES[g],'Fecha: '+new Date().toLocaleDateString('es-AR'),''];
+  function armaRegistro(g){var panel=document.getElementById('p-'+g);var out=['Registro Kawsay · '+NOMBRES[g],'Fecha: '+new Date().toLocaleDateString('es-AR'),''];
     var st=lee('lista-'+g,{});panel.querySelectorAll('.check[data-lista] li').forEach(function(li,i){out.push((st[i]?'[x] ':'[ ] ')+li.querySelector('span:last-child').textContent);});
     out.push('');
     if(g==='g2'){out.push('CARTELES');CART.forEach(function(c,i){out.push(c[0]+': '+lee('cart-'+i,''));});out.push('');}
@@ -835,9 +837,21 @@ Que el archivo no use imágenes externas ni internet.</pre></div>
     var rr=lee('rondas',{});out.push('ENSAYOS');
     PARL.filter(function(p){return GENTE[p.quien].g==='p-'+g;}).forEach(function(p){var r=rr[p.n]||[];
       out.push('N° '+p.n+' ('+GENTE[p.quien].n+'): '+(r.length?r.map(function(x){return 'ronda '+x.n+' '+x.s+' s';}).join(', '):'sin ensayos registrados'));});
-    var blob=new Blob([out.join('\n')],{type:'text/plain;charset=utf-8'});var a=document.createElement('a');
+    return out.join('\n');}
+  document.querySelectorAll('[data-descargar]').forEach(function(b){b.onclick=function(){
+    var g=b.getAttribute('data-descargar');
+    var blob=new Blob([armaRegistro(g)],{type:'text/plain;charset=utf-8'});var a=document.createElement('a');
     a.href=URL.createObjectURL(blob);a.download='registro-kawsay-'+g+'.txt';document.body.appendChild(a);a.click();a.remove();
     setTimeout(function(){URL.revokeObjectURL(a.href);},4000);};});
+  document.querySelectorAll('[data-enviar]').forEach(function(b){b.onclick=function(){
+    var g=b.getAttribute('data-enviar');var est=document.getElementById('est-'+g);
+    if(!ENDPOINT){est.textContent='Todavía no está conectado el envío: bajá la copia.';return;}
+    var quien=sel.value?GENTE[sel.value].n:'';
+    est.textContent='Enviando...';b.disabled=true;
+    fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({fecha:new Date().toLocaleString('es-AR'),quien:quien,grupo:NOMBRES[g],texto:armaRegistro(g)})})
+    .then(function(){est.textContent='Enviado a la profe. Si no llega, bajá la copia.';b.disabled=false;})
+    .catch(function(){est.textContent='Sin internet: bajá la copia y pasala.';b.disabled=false;});};});
 
   /* ---------- docente ---------- */
   function pintaDoc(){var h='<table class="tabla"><tr><th>Grupo</th><th>Pasos tildados</th></tr>';
